@@ -91,14 +91,14 @@ def train_model(x, y, mode, logits, labels, iterations):
                                                      y:labels,
                                                      mode:True})
             print("Loss {1}: {0}".format(loss_val, i))
-
+        tf.train.Saver().save(sess, "/tmp/model.ckpt")
         return  (str(np.argmax(sess.run([prediction], feed_dict={
             x:[logits[4]],
             mode:False})[0])), sess.run([probabilities], feed_dict={x:[logits[4]], mode:False}))
 
 
-
 def main():
+    GenData.create_directory("tmp")
     filenames = os.listdir(GenData.FUNCTIONS_DIRECTORY_NAME)
     filepaths = [os.path.join(GenData.FUNCTIONS_DIRECTORY_NAME, filename) for filename in filenames]
 
@@ -117,9 +117,12 @@ def main():
 
     keep_rate = 0.8
     keep_prob = tf.placeholder(tf.float32)
-    result = train_model(x, y, mode, logits, labels, 40)
+    result = train_model(x, y, mode, logits, labels, 2000)
     print(classification[result[0]])
-    print(result[1])
+    img = cv2.imread(classification[result[0]])
+    print(filepaths[4])
+    cv2.imshow("img", img)
+    cv2.waitKey(0)
 
 
 if __name__ == "__main__":
