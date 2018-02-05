@@ -171,3 +171,7 @@ venv.bak/
 
 
 # End of https://www.gitignore.io/api/python,pycharm
+
+# Filter testDirectory and functionDirectory Repositories
+funcDirectory/
+testDirectory/
