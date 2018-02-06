@@ -175,3 +175,4 @@ venv.bak/
 # Filter testDirectory and functionDirectory Repositories
 funcDirectory/
 testDirectory/
+memory/
